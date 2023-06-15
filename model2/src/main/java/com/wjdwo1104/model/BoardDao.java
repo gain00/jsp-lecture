@@ -55,12 +55,14 @@ public class BoardDao {
 		return result;
 	}
 
-	public ArrayList<BoardDto> getList() {
+	public ArrayList<BoardDto> getList(int start, int end) {
 		ArrayList<BoardDto> boardList = null;
 		getConnection();
-		String sql = "select * from board order by id desc";
+		String sql = "select * from (select rownum as no,b.* from(select * from board order by id desc) b) where no >= ? and no<= ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
 			rs = pstmt.executeQuery();
 			boardList = new ArrayList<>();
 			while(rs.next()) {
@@ -131,6 +133,48 @@ public class BoardDao {
 			close();
 		}
 		return result;
+	}
+
+	public int modifyBoard(BoardDto boardDto) {
+		int result = 0;
+		getConnection();
+		String sql = "update board set  title = ?, name = ?, contents = ? where id = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardDto.getTitle());
+			pstmt.setString(2, boardDto.getName());
+			pstmt.setString(3, boardDto.getContents());
+			pstmt.setInt(4, boardDto.getId());
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
+	}
+
+	public double getTotal() {
+		double total = 0;
+		getConnection();
+		String sql = "select count(*) as total from board";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				total = rs.getInt("total");
+			}
+		
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			close();
+		}
+		
+		
+		return total;
 	}
 }
 

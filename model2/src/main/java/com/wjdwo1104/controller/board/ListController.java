@@ -24,12 +24,27 @@ public class ListController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// board 테이블의 row값을 가지고 오기....
 		BoardDao boardDao = new BoardDao();
-		ArrayList<BoardDto> boardList = boardDao.getList();
+		String strStart = request.getParameter("start");
+		String strEnd = request.getParameter("end");
+		
+		double pagePerList = 10;
+		double total = boardDao.getTotal();//전체페이지
+		int pageTotal = (int) (Math.ceil(total/pagePerList));
+		
+		
+		
+		
+		int start = strStart==null?1 : Integer.parseInt(strStart);
+		int end = strEnd==null?10 : Integer.parseInt(strEnd);
+		
+		
+		ArrayList<BoardDto> boardList = boardDao.getList(start,end);
 		
 		request.setAttribute("boardList", boardList);
+		request.setAttribute("pageTotal", pageTotal);
 		
 		RequestDispatcher dispatcher = 
-				request.getRequestDispatcher("/WEB-INF/board/write.jsp");
+				request.getRequestDispatcher("/WEB-INF/board/list.jsp");
 		dispatcher.forward(request, response);
 	}
 }
