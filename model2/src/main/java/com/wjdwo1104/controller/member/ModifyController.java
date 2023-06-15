@@ -1,4 +1,4 @@
-package com.wjdwo1104.controller;
+package com.wjdwo1104.controller.member;
 
 import java.io.IOException;
 
@@ -13,14 +13,14 @@ import com.wjdwo1104.model.MemberDao;
 import com.wjdwo1104.model.MemberDto;
 
 
-@WebServlet("/member/delete")
-public class DeleteFormController extends HttpServlet {
+@WebServlet("/member/modify")
+public class ModifyController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-   
-    public DeleteFormController() {
+  
+    public ModifyController() {
         super();
-       
+        
     }
 
 	
@@ -29,9 +29,8 @@ public class DeleteFormController extends HttpServlet {
 		MemberDao memberDao = new MemberDao();
 		MemberDto infoMemberDto = memberDao.getMemberInfo(userId);//변수 보내려면 request에다가 실음
 		request.setAttribute("infoMemberDto", infoMemberDto);//변수배열 이해
-		RequestDispatcher dispatcher = 
-				request.getRequestDispatcher("/WEB-INF/member/Delete.jsp");
-		dispatcher.forward(request, response);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/modify.jsp");
+		dispatcher.forward(request,response);
 	}
 
 }

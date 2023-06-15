@@ -5,6 +5,8 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletResponse;
 
+
+
 public class ScriptWriter {
 	public static void alert(HttpServletResponse response,String alertMsg) throws IOException {
 		response.setContentType("text/html;charset = utf-8");

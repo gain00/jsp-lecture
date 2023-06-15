@@ -6,6 +6,7 @@
 		<item key="isRegEx" value="false"/>
 		<item key="selection" value="path"/>
 		<list key="findhistory">
+			<item value="alertAndBack"/>
 			<item value="path"/>
 			<item value="taglib"/>
 			<item value="&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot; %&gt;"/>
@@ -13,7 +14,6 @@
 			<item value="jjang"/>
 			<item value="id중복"/>
 			<item value="script"/>
-			<item value="userId"/>
 		</list>
 		<list key="replacehistory">
 		</list>

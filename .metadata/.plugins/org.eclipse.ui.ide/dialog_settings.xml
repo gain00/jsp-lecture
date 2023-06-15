@@ -13,6 +13,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\y\Desktop\새 폴더\jsp-lecture"/>
 			<item value="C:\Users\y\Desktop\ljj\jsp-lecture"/>
 		</list>
 	</section>

@@ -1,4 +1,4 @@
-package com.wjdwo1104.controller;
+package com.wjdwo1104.controller.member;
 
 import java.io.IOException;
 
