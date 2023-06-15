@@ -6,14 +6,14 @@
 	//pageContext < requset < session < applicationContext
 %>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8" />
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="../css/layout.css" />
+
 <script src="../js/bootstrap.bundle.min.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -38,7 +38,7 @@
 					<c:otherwise>
 						<li class="nav-item"><a href="../member/logout" class="nav-link">logout</a></li>
 						<li class="nav-item"><a href="../member/info?userId=${loggedMember.id }" class="nav-link">${loggedMember.name }</a></li>
-						<li class="nav-item"><a href="../board/list" class="nav-link">게시판</a>					
+						<li class="nav-item"><a href="../board/list" class="nav-link">게시판</a></li>				
 						<li class="nav-item"><a href="../board/write" class="nav-link">글쓰기</a></li>
 					</c:otherwise>	
 				</c:choose>

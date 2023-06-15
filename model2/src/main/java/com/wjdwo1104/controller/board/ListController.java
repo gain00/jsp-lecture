@@ -27,8 +27,9 @@ public class ListController extends HttpServlet {
 		ArrayList<BoardDto> boardList = boardDao.getList();
 		
 		request.setAttribute("boardList", boardList);
+		
 		RequestDispatcher dispatcher = 
-				request.getRequestDispatcher("/WEB-INF/board/list.jsp");
+				request.getRequestDispatcher("/WEB-INF/board/write.jsp");
 		dispatcher.forward(request, response);
 	}
 }

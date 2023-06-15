@@ -46,6 +46,7 @@ public class BoardDao {
 			pstmt.setString(3, boardDto.getTitle());
 			pstmt.setString(4, boardDto.getContents());
 			result = pstmt.executeUpdate();
+			System.out.println(result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -54,99 +55,84 @@ public class BoardDao {
 		return result;
 	}
 
-
-public ArrayList<BoardDto> getList() {
-	ArrayList<BoardDto> boardList = null;
-	getConnection();
-	String sql = "select * from board";
-	try {
-		pstmt = conn.prepareStatement(sql);
-		rs = pstmt.executeQuery();
-		boardList = new ArrayList<>();
-		while(rs.next()) {
-			BoardDto boardDto = new BoardDto();
-			boardDto.setId(rs.getInt("id"));
-			boardDto.setUserId(rs.getString("userId"));
-			boardDto.setName(rs.getString("name"));
-			boardDto.setTitle(rs.getString("title"));
-			boardDto.setContents(rs.getString("contents"));
-			boardDto.setRegDate(rs.getString("regDate"));
-			boardDto.setHit(rs.getInt("hit"));
-			boardList.add(boardDto);
-			
+	public ArrayList<BoardDto> getList() {
+		ArrayList<BoardDto> boardList = null;
+		getConnection();
+		String sql = "select * from board order by id desc";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			boardList = new ArrayList<>();
+			while(rs.next()) {
+				BoardDto boardDto = new BoardDto();
+				boardDto.setId(rs.getInt("id"));
+				boardDto.setUserId(rs.getString("userId"));
+				boardDto.setName(rs.getString("name"));
+				boardDto.setTitle(rs.getString("title"));
+				boardDto.setContents(rs.getString("contents"));
+				boardDto.setRegDate(rs.getString("regDate"));
+				boardDto.setHit(rs.getInt("hit"));
+				boardList.add(boardDto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-	} catch (Exception e) {
-		e.printStackTrace();
-	}finally {
-		close();
+		return boardList;
 	}
-	return boardList;
-}
-
-
-public void updateHit(int id) {
-	getConnection();
-	String sql = "update board set hit = hit + 1 where id = ?";
-	
-	try {
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1, id);
-		pstmt.executeUpdate();
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}finally {
-		close();
-	}
-}
-
-
-
-
-
-
-
-public BoardDto getView(int id) {
-	BoardDto boardDto = null;
-	updateHit(id);
-	getConnection();
-	String sql = "select * from board where id = ?";
-
-	try {
-		pstmt = conn.prepareStatement(sql);
-		pstmt.setInt(1,id);
-		rs = pstmt.executeQuery();
-		if(rs.next()) {
-			boardDto = new BoardDto();
-			boardDto.setId(rs.getInt("id"));
-			boardDto.setUserId(rs.getString("userId"));
-			boardDto.setName(rs.getString("name"));
-			boardDto.setTitle(rs.getString("title"));
-			boardDto.setContents(rs.getString("contents"));
-			boardDto.setRegDate(rs.getString("regDate"));
-			boardDto.setHit(rs.getInt("hit"));
+	public void updateHit(int id) {
+		getConnection();
+		String sql = "update board set hit = hit + 1 where id = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, id);
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
 		}
-	} catch (Exception e) {
-		e.printStackTrace();
 	}
-	return boardDto;
+	public BoardDto getView(int id) {
+		BoardDto boardDto = null;
+		updateHit(id);
+		getConnection();
+		String sql = "select * from board where id = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,id);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				boardDto = new BoardDto();
+				boardDto.setId(rs.getInt("id"));
+				boardDto.setUserId(rs.getString("userId"));
+				boardDto.setName(rs.getString("name"));
+				boardDto.setTitle(rs.getString("title"));
+				boardDto.setContents(rs.getString("contents"));
+				boardDto.setRegDate(rs.getString("regDate"));
+				boardDto.setHit(rs.getInt("hit"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return boardDto;
+	}
+
+	public int deleteBoard(int id) {
+		int result = 0;
+		getConnection();
+		String sql = "delete from board where id = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,id);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return result;
+	}
 }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

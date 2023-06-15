@@ -29,6 +29,7 @@ public class ModifyController extends HttpServlet {
 		MemberDao memberDao = new MemberDao();
 		MemberDto infoMemberDto = memberDao.getMemberInfo(userId);//변수 보내려면 request에다가 실음
 		request.setAttribute("infoMemberDto", infoMemberDto);//변수배열 이해
+		System.out.println(infoMemberDto);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/member/modify.jsp");
 		dispatcher.forward(request,response);
 	}
