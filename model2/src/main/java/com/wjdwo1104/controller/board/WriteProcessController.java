@@ -33,6 +33,12 @@ public class WriteProcessController extends HttpServlet {
 		boardDto.setTitle(title);
 		boardDto.setContents(contents);
 		BoardDao boardDao = new BoardDao();
+		
+		/*
+		 * for(int i=1; i<100; i++) {
+		 * 
+		 * boardDao.writeBoard(boardDto); };
+		 */
 		int result = boardDao.writeBoard(boardDto);
 		if(result>0) {
 			response.sendRedirect("../board/list");

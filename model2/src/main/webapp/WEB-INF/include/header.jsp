@@ -14,8 +14,9 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
 <link rel="stylesheet" href="../css/layout.css" />
-
+<link href="../summernote/summernote-bs5.css" rel="stylesheet">
 <script src="../js/bootstrap.bundle.min.js"></script>
+<script src="../summernote"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
@@ -51,7 +52,7 @@
 					<li class="nav-item"><a href="logout.jsp" class="nav-link">logout</a></li>
 					<li class="nav-item"><a href="info.jsp" class="nav-link">${loggedMemberName }</a></li>
 				</c:if> --%>
-			</ul>
+			</ul>			
 		</header>
 	</div>
 	

@@ -55,10 +55,14 @@ public class BoardDao {
 		return result;
 	}
 
+
 	public ArrayList<BoardDto> getList(int start, int end) {
+		System.out.println("end==="+end);
 		ArrayList<BoardDto> boardList = null;
 		getConnection();
-		String sql = "select * from (select rownum as no,b.* from(select * from board order by id desc) b) where no >= ? and no<= ?";
+		String sql = "select * from"
+				+ "(select rownum as no,b.* from "
+				+ "    (select * from board order by id desc) b) where no >= ?  and no <= ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, start);
@@ -76,6 +80,10 @@ public class BoardDao {
 				boardDto.setHit(rs.getInt("hit"));
 				boardList.add(boardDto);
 			}
+			System.out.println(boardList.get(0).getName());
+			System.out.println(boardList.get(0).getTitle());
+			System.out.println(boardList.get(0).getId());
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
