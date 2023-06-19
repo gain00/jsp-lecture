@@ -25,8 +25,8 @@
           <input type="text" name="userEmail" class="form-control" id="floatingMail" placeholder="이메일을 입력해 주세요." />
         </div>
         <div class="mb-3">
-  <label for="formFile" class="form-label">profile</label>
-  <input class="form-control" type="file" id="formFile">
+  <label for="profile" class="form-label">profile</label>
+  <input class="form-control" type="file" id="formfile" name ="profile">
 </div>
 
         <div class="input-group mb-3">

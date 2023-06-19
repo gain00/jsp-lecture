@@ -4,16 +4,16 @@
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value=""/>
+		<item key="selection" value="pageDto"/>
 		<list key="findhistory">
+			<item value="pagedto"/>
+			<item value="pageDto"/>
+			<item value="saveDirectory "/>
+			<item value="saveDirectory"/>
 			<item value="double"/>
 			<item value="alertAndBack"/>
 			<item value="path"/>
 			<item value="taglib"/>
-			<item value="&lt;%@ taglib uri=&quot;http://java.sun.com/jsp/jstl/core&quot; prefix=&quot;c&quot; %&gt;"/>
-			<item value="알 수"/>
-			<item value="jjang"/>
-			<item value="id중복"/>
 		</list>
 		<list key="replacehistory">
 		</list>

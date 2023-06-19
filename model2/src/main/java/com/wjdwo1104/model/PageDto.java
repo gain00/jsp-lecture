@@ -1,30 +1,24 @@
 package com.wjdwo1104.model;
 
-import javax.servlet.http.HttpServlet;
-
-
-public class PageDto extends HttpServlet {
+public class PageDto {
 	private int pageTotal;
 	private double total;
 	private int pageBlock;
-	private int PageStart;
-	private int Pageend;
-	private double Pageperlist;
-	
-	
-	
+	private int pageStart;
+	private int pageEnd;
+	private double pagePerList;
 	
 	public PageDto() {
 		super();
 	}
-	public PageDto(int pageTotal, double total, int pageBlock, int pageStart, int pageend, double pageperlist) {
+	public PageDto(int pageTotal, double total, int pageBlock, int pageStart, int pageEnd, double pagePerList) {
 		super();
 		this.pageTotal = pageTotal;
 		this.total = total;
 		this.pageBlock = pageBlock;
-		PageStart = pageStart;
-		Pageend = pageend;
-		Pageperlist = pageperlist;
+		this.pageStart = pageStart;
+		this.pageEnd = pageEnd;
+		this.pagePerList = pagePerList;
 	}
 	public int getPageTotal() {
 		return pageTotal;
@@ -45,28 +39,24 @@ public class PageDto extends HttpServlet {
 		this.pageBlock = pageBlock;
 	}
 	public int getPageStart() {
-		return PageStart;
+		return pageStart;
 	}
 	public void setPageStart(int pageStart) {
-		PageStart = pageStart;
+		this.pageStart = pageStart;
 	}
-	public int getPageend() {
-		return Pageend;
+	public int getPageEnd() {
+		return pageEnd;
 	}
-	public void setPageend(int pageend) {
-		Pageend = pageend;
+	public void setPageEnd(int pageEnd) {
+		this.pageEnd = pageEnd;
 	}
-	public int getPageperlist() {
-		return (int)Pageperlist;
+	public int getPagePerList() {
+		return (int)pagePerList;
 	}
-	public void setPageperlist(double pageperlist) {
-		Pageperlist = pageperlist;
+	public void setPagePerList(double pagePerList) {
+		this.pagePerList = pagePerList;
 	}
-	
-	
 	
 	
 	
 }
-
-

@@ -13,10 +13,11 @@
 <meta charset="UTF-8" />
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link href="../summernote/summernote-lite.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/layout.css" />
-<link href="../summernote/summernote-bs5.css" rel="stylesheet">
+<script src="../js/jquery-3.7.0.min.js"></script>
 <script src="../js/bootstrap.bundle.min.js"></script>
-<script src="../summernote"></script>
+<script src="../summernote/summernote-lite.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
@@ -26,7 +27,7 @@
 			class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
 			<a href="/"
 				class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-				wjdwo1104 </a>
+				jjang051 </a>
 			<ul class="nav nav-pills">
 				
 				
@@ -40,8 +41,8 @@
 					<c:otherwise>
 						<li class="nav-item"><a href="../member/logout" class="nav-link">logout</a></li>
 						<li class="nav-item"><a href="../member/info?userId=${loggedMember.id }" class="nav-link">${loggedMember.name }</a></li>
-						<li class="nav-item"><a href="../board/list" class="nav-link">게시판</a></li>				
-						<li class="nav-item"><a href="../board/write" class="nav-link">글쓰기</a></li>
+						<li class="nav-item"><a href="../board/list" class="nav-link">게시판</a></li>						
+						
 					</c:otherwise>	
 				</c:choose>
 				<%-- <c:if test="${empty loggedMember}">
@@ -52,11 +53,6 @@
 					<li class="nav-item"><a href="logout.jsp" class="nav-link">logout</a></li>
 					<li class="nav-item"><a href="info.jsp" class="nav-link">${loggedMemberName }</a></li>
 				</c:if> --%>
-			</ul>			
+			</ul>
 		</header>
 	</div>
-	
-	
-	
-	
-	

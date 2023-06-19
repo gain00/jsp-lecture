@@ -24,7 +24,15 @@
 	        </div>
 		</form>
 	</div>
+	<script>
+      $("#contents").summernote({
+        //placeholder: 'Hello Bootstrap 5',
+        tabsize: 2,
+        height: 100
+      });
+    </script>
 <%@ include file="../include/footer.jsp"%>
+
 
 
 

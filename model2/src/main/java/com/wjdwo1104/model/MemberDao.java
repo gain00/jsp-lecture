@@ -37,10 +37,10 @@ public class MemberDao {
 			
 	}
 
-public int insertMember(MemberDto memberDto) {
+public int insertMember(MemberDto memberDto) { 
 	int result = 0;
 	getConnection();
-	String sql = "insert into member values(?,?,?,?,?,?,?,?)";
+	String sql = "insert into member values(?,?,?,?,?,?,?,?,?,?thh)";
 	try {
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memberDto.getId());
@@ -51,6 +51,9 @@ public int insertMember(MemberDto memberDto) {
 		pstmt.setString(6, memberDto.getAddress());
 		pstmt.setString(7, memberDto.getDetailAddress());
 		pstmt.setString(8, memberDto.getExtraAddress());
+		pstmt.setString(9, memberDto.getProfile());
+		pstmt.setString(10, memberDto.getRealProfile());
+		
 		result = pstmt.executeUpdate();
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
