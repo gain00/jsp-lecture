@@ -2,12 +2,15 @@ package com.wjdwo1104.controller.member;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.wjdwo1104.model.MemberDao;
 import com.wjdwo1104.model.MemberDto;
 import com.wjdwo1104.utils.ScriptWriter;
@@ -24,8 +27,24 @@ public class JoinProcessController extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("왜 안넘어오니...");
 		
-		
+		// linux cli 속도이득 무료 
 		request.setCharacterEncoding("utf-8"); 
+		
+		int fileSize = 1024*1024*10;
+		String encoding = "utf-8";
+		
+		DefaultFileRenamePolicy fileRenamePolicy = new DefaultFileRenamePolicy();
+		
+		
+		ServletContext context = this.getServletContext();
+		String savePath = "upload";
+		String realPath = context.getRealPath(savePath);
+		
+		System.out.println(realPath);
+		
+		MultipartRequest multipartRequest = new MultipartRequest(request,realPath,fileSize,encoding,fileRenamePolicy);
+		
+		
 		String userId = request.getParameter("userId"); 
 		String userPw = request.getParameter("userPw"); 
 		String userName = request.getParameter("userName"); 

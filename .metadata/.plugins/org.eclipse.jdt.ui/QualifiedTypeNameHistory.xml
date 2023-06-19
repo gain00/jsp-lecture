@@ -6,4 +6,6 @@
     <fullyQualifiedTypeName name="javax.servlet.DispatcherType"/>
     <fullyQualifiedTypeName name="javax.servlet.RequestDispatcher"/>
     <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="com.wjdwo1104.model.PageDto"/>
+    <fullyQualifiedTypeName name="com.wjdwo1104.utils.ScriptWriter"/>
 </qualifiedTypeNameHistroy>
