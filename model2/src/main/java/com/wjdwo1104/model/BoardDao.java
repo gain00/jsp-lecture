@@ -34,17 +34,40 @@ public class BoardDao {
 			e.printStackTrace();
 		}
 	}
+	public int getMaxRegroup() {
+		int result  = 0;
+		getConnection();
+		String sql = "SELECT nvl(max(regroup),1) as regroupmax from replyboard";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				result = rs.getInt("regroupmax");
+			}
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	public int writeBoard(BoardDto boardDto) {
 		int result = 0;
+		int max = getMaxRegroup();
+		max++;
+		
 		getConnection();
-		String sql = "insert into board values(seq_board.nextval,?,?,?,?,sysdate,0)";
+		
+		String sql = "insert into replyboard values(seq_board.nextval,?,?,?,?,sysdate,0,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, boardDto.getUserId());
 			pstmt.setString(2, boardDto.getName());
 			pstmt.setString(3, boardDto.getTitle());
 			pstmt.setString(4, boardDto.getContents());
+			pstmt.setInt(5, max);
+			pstmt.setInt(6, 1);
+			pstmt.setInt(7, 1);
 			result = pstmt.executeUpdate();
 			System.out.println(result);
 		} catch (Exception e) {
@@ -62,7 +85,7 @@ public class BoardDao {
 		getConnection();
 		String sql = "select * from"
 				+ "(select rownum as no,b.* from "
-				+ "    (select * from board order by id desc) b) where no >= ?  and no <= ?";
+				+ "    (select * from replyboard order by id desc) b) where no >= ?  and no <= ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, start);
@@ -91,7 +114,7 @@ public class BoardDao {
 	}
 	public void updateHit(int id) {
 		getConnection();
-		String sql = "update board set hit = hit + 1 where id = ?";
+		String sql = "update replyboard set hit = hit + 1 where id = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, id);
@@ -106,7 +129,7 @@ public class BoardDao {
 		BoardDto boardDto = null;
 		updateHit(id);
 		getConnection();
-		String sql = "select * from board where id = ?";
+		String sql = "select * from replyboard where id = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,id);
@@ -130,7 +153,7 @@ public class BoardDao {
 	public int deleteBoard(int id) {
 		int result = 0;
 		getConnection();
-		String sql = "delete from board where id = ?";
+		String sql = "delete from replyboard where id = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,id);
@@ -146,7 +169,7 @@ public class BoardDao {
 	public int modifyBoard(BoardDto boardDto) {
 		int result = 0;
 		getConnection();
-		String sql = "update board set  title = ?, name = ?, contents = ? where id = ?";
+		String sql = "update replyboard set  title = ?, name = ?, contents = ? where id = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, boardDto.getTitle());
@@ -166,7 +189,7 @@ public class BoardDao {
 	public double getTotal() {
 		double total = 0;
 		getConnection();
-		String sql = "select count(*) as total from board";
+		String sql = "select count(*) as total from replyboard";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();

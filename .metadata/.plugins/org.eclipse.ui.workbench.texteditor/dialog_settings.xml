@@ -6,14 +6,14 @@
 		<item key="isRegEx" value="false"/>
 		<item key="selection" value="pageDto"/>
 		<list key="findhistory">
-			<item value="pagedto"/>
 			<item value="pageDto"/>
+			<item value="board"/>
+			<item value="pagedto"/>
 			<item value="saveDirectory "/>
 			<item value="saveDirectory"/>
 			<item value="double"/>
 			<item value="alertAndBack"/>
 			<item value="path"/>
-			<item value="taglib"/>
 		</list>
 		<list key="replacehistory">
 		</list>
