@@ -31,7 +31,9 @@
 		</tbody>
 	</table>
 	<div class="mt-5 text-center">
+	
 		<a href="../board/write" class="btn btn-primary">WRITE</a>
+		<a href="../board/reply?regroup=${boardDto.regroup}&relevel=${boardDto.relevel}&restep=${boardDto.restep}" class="btn btn-primary">REPLY</a>
 		<c:if test="${loggedMember.id eq boardDto.userId}">
 			<a href="../board/modify?id=${boardDto.id}" class="btn btn-primary">MODIFY</a>
 			<a href="../board/delete?id=${boardDto.id}" id="btnDelete" class="btn btn-danger">DELETE</a>

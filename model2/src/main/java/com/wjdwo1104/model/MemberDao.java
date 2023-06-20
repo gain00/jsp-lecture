@@ -40,7 +40,7 @@ public class MemberDao {
 public int insertMember(MemberDto memberDto) { 
 	int result = 0;
 	getConnection();
-	String sql = "insert into member values(?,?,?,?,?,?,?,?,?,?thh)";
+	String sql = "insert into member values(?,?,?,?,?,?,?,?,?,?)";
 	try {
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, memberDto.getId());

@@ -13,6 +13,7 @@
 <meta charset="UTF-8" />
 <title>Insert title here</title>
 <link rel="stylesheet" href="../css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 <link href="../summernote/summernote-lite.css" rel="stylesheet">
 <link rel="stylesheet" href="../css/layout.css" />
 <script src="../js/jquery-3.7.0.min.js"></script>
@@ -27,8 +28,8 @@
 			class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
 			<a href="/"
 				class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-				jjang051 </a>
-			<ul class="nav nav-pills">
+				wjdwo </a>
+			<ul class="nav nav-pills gnb">
 				
 				
 				
@@ -40,7 +41,29 @@
 					</c:when>
 					<c:otherwise>
 						<li class="nav-item"><a href="../member/logout" class="nav-link">logout</a></li>
-						<li class="nav-item"><a href="../member/info?userId=${loggedMember.id }" class="nav-link">${loggedMember.name }</a></li>
+						<li class="nav-item">
+							<a href="../member/info?userId=${loggedMember.id }" class="nav-link">
+								<c:choose>
+									<c:when test="${loggedMember.realProfile eq null }">
+										<div class="profileBox">
+											<img 
+											src="${pageContext.request.contextPath }/upload/account.png"
+								 			class="profile">
+											${loggedMember.name }
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="profileBox">
+											<img 
+											src="${pageContext.request.contextPath }/upload/${loggedMember.realProfile }"
+								 			class="profile">
+											${loggedMember.name }
+										</div>	
+									</c:otherwise>
+								</c:choose>
+								
+							</a>
+						</li>
 						<li class="nav-item"><a href="../board/list" class="nav-link">게시판</a></li>						
 						
 					</c:otherwise>	
@@ -56,3 +79,8 @@
 			</ul>
 		</header>
 	</div>
+	
+	
+	
+	
+	

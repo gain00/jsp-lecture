@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,49 +56,49 @@ import com.wjdwo1104.utils.ScriptWriter;
 //	e.printStackTrace();
 //}
 
-
 @WebServlet("/member/joinProcess")
 public class JoinProcessController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public JoinProcessController() {
-        super();
-    }
 
-	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("왜 안넘어오니...");
-		
-		// linux cli 속도이득 무료 
-		request.setCharacterEncoding("utf-8"); 
+	public JoinProcessController() {
+		super();
+	}
+
+	protected void service(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		request.setCharacterEncoding("utf-8");
 		String encoding = "utf-8";
-		
-		int fileSize = 1024*1024*10;
-		String savePath = "C:\\Users\\y\\upload";
-		File currentDir = new File(savePath);
 
+		int fileSize = 1024 * 1024 * 10;
+		String savePath = "upload";
+		ServletContext  context = this.getServletContext();
+		String realPath = context.getRealPath(savePath);
 		
+		System.out.println("realPath==="+realPath);
+		
+		File currentDir = new File(realPath);
+		if(!currentDir.exists()) {
+			currentDir.mkdir();
+		}
+		System.out.println("currentDir==="+currentDir);
 		DefaultFileRenamePolicy fileRenamePolicy = new DefaultFileRenamePolicy();
+		MultipartRequest multipartRequest = new MultipartRequest(request,realPath,fileSize,encoding,
+				fileRenamePolicy);
+		String userId = multipartRequest.getParameter("userId");
+		String userPw = multipartRequest.getParameter("userPw");
+		String userName = multipartRequest.getParameter("userName");
+		String userEmail = multipartRequest.getParameter("userEmail");
+		int zonecode = Integer.parseInt(multipartRequest.getParameter("zonecode"));
+		System.out.println(zonecode);
+		String userAddress = multipartRequest.getParameter("userAddress");
+		String detailAddress = multipartRequest.getParameter("detailAddress");
+		String extraAddress = multipartRequest.getParameter("extraAddress");
 		
+		String originalFile = multipartRequest.getOriginalFileName("profile");
+		String renameFile = multipartRequest.getFilesystemName("profile");
 		
-		MultipartRequest multipartRequest = new MultipartRequest(request,savePath,fileSize,encoding,fileRenamePolicy);
-		
-		
-		
-		
-		String userId = multipartRequest.getParameter("userId"); 
-		String userPw = multipartRequest.getParameter("userPw"); 
-		String userName = multipartRequest.getParameter("userName"); 
-		String userEmail = multipartRequest.getParameter("userEmail"); 
-		int zonecode = Integer.parseInt(multipartRequest.getParameter("zonecode")); 
-		String userAddress = multipartRequest.getParameter("userAddress"); 
-		String detailAddress = multipartRequest.getParameter("detailAddress"); 
-		String extraAddress = multipartRequest.getParameter("extraAddress"); 
 		MemberDao memberDao = new MemberDao();
-		
-		String origianlFile = multipartRequest.getOriginalFileName("profile");
-		String renameFile = multipartRequest.getFilesystemName("porfile");
-		
-		
 		MemberDto memberDto = new MemberDto();
 		memberDto.setId(userId);
 		memberDto.setPassword(userPw);
@@ -107,11 +108,13 @@ public class JoinProcessController extends HttpServlet {
 		memberDto.setExtraAddress(extraAddress);
 		memberDto.setDetailAddress(detailAddress);
 		memberDto.setEmail(userEmail);
+		memberDto.setProfile(originalFile);
 		memberDto.setRealProfile(renameFile);
-		
+
+		System.out.println(memberDto);
+
 		int result = memberDao.insertMember(memberDto);
-		System.out.println(result);
-		if(result>0) {
+		if (result > 0) {
 			ScriptWriter.alertAndNext(response, "회원가입 되었습니다.", "../member/login");
 		} else {
 			ScriptWriter.alertAndBack(response, "알 수 없는 오류가 발생 되었습니다. 다시 시도해 주세요");
@@ -119,10 +122,9 @@ public class JoinProcessController extends HttpServlet {
 	}
 
 	private String getToday() {
+		// 오늘 날짜 돌려받기
 		return new SimpleDateFormat("yyyy-MM-dd").format(System.currentTimeMillis());
 	}
-
-
 }
 
 

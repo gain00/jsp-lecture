@@ -1,10 +1,9 @@
-INDEX VERSION 1.4+C:\Users\y\Desktop\새 폴더 (6)\jsp-lecture\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-769047569.index
-1383607543.index
-3761448524.index
+INDEX VERSION 1.4+C:\Users\y\Desktop\새 폴더\jsp-lecture\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3619465507.index
 3136247592.index
-3353744694.index
-3456504287.index
-2146031346.index
-946512577.index
 602277522.index
+472467716.index
+1830328352.index
+946512577.index
+285844223.index
+769047569.index

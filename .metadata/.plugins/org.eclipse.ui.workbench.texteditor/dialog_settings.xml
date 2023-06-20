@@ -4,16 +4,16 @@
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="pageDto"/>
+		<item key="selection" value="jj"/>
 		<list key="findhistory">
-			<item value="pageDto"/>
-			<item value="board"/>
-			<item value="pagedto"/>
-			<item value="saveDirectory "/>
-			<item value="saveDirectory"/>
-			<item value="double"/>
-			<item value="alertAndBack"/>
-			<item value="path"/>
+			<item value="jj"/>
+			<item value="update"/>
+			<item value="getlist"/>
+			<item value="relevel"/>
+			<item value="updatere"/>
+			<item value="insert"/>
+			<item value="regroup"/>
+			<item value="getList"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -67,7 +67,7 @@ public class ListController extends HttpServlet {
 		pageDto.setPageEnd(pageEnd);
 		pageDto.setPagePerList(pagePerList);
 		
-		ArrayList<BoardDto> boardList = boardDao.getList(start,end);
+		ArrayList<BoardDto> boardList = boardDao.getList();
 		request.setAttribute("clickPage", clickPage);
 		request.setAttribute("boardList", boardList);
 //		request.setAttribute("pageTotal", pageTotal);
