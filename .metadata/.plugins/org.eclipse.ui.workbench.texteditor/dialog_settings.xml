@@ -4,16 +4,16 @@
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="jj"/>
+		<item key="selection" value="getList"/>
 		<list key="findhistory">
+			<item value="getList"/>
+			<item value="getvie"/>
+			<item value="getlist"/>
 			<item value="jj"/>
 			<item value="update"/>
-			<item value="getlist"/>
 			<item value="relevel"/>
 			<item value="updatere"/>
 			<item value="insert"/>
-			<item value="regroup"/>
-			<item value="getList"/>
 		</list>
 		<list key="replacehistory">
 		</list>

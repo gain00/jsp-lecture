@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wjdwo1104.mybatis">
+  <select id="getList" resultType="BoardDto">
+    select rownum as no, b.* from (select * from replyboard order by regroup desc, relevel asc) b
+  </select>
+  
+  <select id="getView" resultType="BoardDto" parameterType="Integer"><!--내가만든 알리아스 이름이 보드디티오  -->
+    select * from replyboard where id = #{id}
+  </select>
+  
+  
+</mapper>
+  

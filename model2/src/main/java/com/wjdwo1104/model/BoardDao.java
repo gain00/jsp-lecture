@@ -5,6 +5,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.wjdwo1104.mybatis.MybatisConnerctionFactory;
 
 public class BoardDao {
 	private String driver = "oracle.jdbc.OracleDriver"; 
@@ -91,46 +96,11 @@ public class BoardDao {
 		return result;
 	}
 
-	public ArrayList<BoardDto> getList() {
-		ArrayList<BoardDto> boardList = null;
-		getConnection();
-//		String sql = "select * from"
-//				+ "(select rownum as no,b.* from "
-//				+ "    (select * from replyboard order by id desc) b) where no >= ?  and no <= ?";
-		String sql ="select rownum as no, b.* from ("+
-							"select * from replyboard order by regroup desc, relevel asc"+
-						") b";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			//pstmt.setInt(1, start);
-			//pstmt.setInt(2, end);
-			rs = pstmt.executeQuery();
-			boardList = new ArrayList<>();
-			while(rs.next()) {
-				BoardDto boardDto = new BoardDto();
-				boardDto.setId(rs.getInt("id"));
-				boardDto.setUserId(rs.getString("userId"));
-				boardDto.setName(rs.getString("name"));
-				boardDto.setTitle(rs.getString("title"));
-				boardDto.setContents(rs.getString("contents"));
-				boardDto.setRegDate(rs.getString("regDate"));
-				boardDto.setHit(rs.getInt("hit"));
-				boardDto.setRegroup(rs.getInt("regroup"));
-				boardDto.setRelevel(rs.getInt("relevel"));
-				boardDto.setRestep(rs.getInt("restep"));
-				boardDto.setAvailable(rs.getInt("available"));
-				
-				
-				
-				boardList.add(boardDto);
-			}
-			System.out.println(boardList.get(0).getName());
-			System.out.println(boardList.get(0).getTitle());
-			System.out.println(boardList.get(0).getId());
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public List<BoardDto> getList() {
+		List<BoardDto> boardList = null;
+		SqlSession sqlSession = MybatisConnerctionFactory.getSqllSession();
+		boardList = sqlSession.selectList("getList");
+		sqlSession.close();
 		return boardList;
 	}
 	public void updateHit(int id) {
@@ -149,31 +119,11 @@ public class BoardDao {
 	public BoardDto getView(int id) {
 		BoardDto boardDto = null;
 		updateHit(id);
-		getConnection();
-		String sql = "select * from replyboard where id = ?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,id);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				boardDto = new BoardDto();
-				boardDto.setId(rs.getInt("id"));
-				boardDto.setUserId(rs.getString("userId"));
-				boardDto.setName(rs.getString("name"));
-				boardDto.setTitle(rs.getString("title"));
-				boardDto.setContents(rs.getString("contents"));
-				boardDto.setRegDate(rs.getString("regDate"));
-				boardDto.setHit(rs.getInt("hit"));
-				boardDto.setRegroup(rs.getInt("regroup"));
-				boardDto.setRelevel(rs.getInt("relevel"));
-				boardDto.setRestep(rs.getInt("restep"));
-				boardDto.setAvailable(rs.getInt("available"));
-				
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		SqlSession sqlSession = MybatisConnerctionFactory.getSqllSession();
+		boardDto = sqlSession.selectOne("getView",id);
+		sqlSession.close();
+		
+		
 		return boardDto;
 	}
 
@@ -254,7 +204,72 @@ public class BoardDao {
 		}
 		return result;
 	}
+
+
+	public ArrayList<BoardDto> search(String category, String searchWord) {
+		ArrayList<BoardDto> searchList = null;
+		getConnection();
+		String sql = null;
+//		String sql = "select * from"
+//				+ "(select rownum as no,b.* from "
+//				+ "    (select * from replyboard order by id desc) b) where no >= ?  and no <= ?";
+		String selectedCategory = null;
+//		if(category.equals("title")) {
+//			sql ="select * from replyboard where title like '%'||?||'%'";
+//		}else if(category=="name") {
+//			sql ="select * from replyboard where name like '%'||?||'%'";
+//		}else if(category=="contents") {
+//			sql ="select * from replyboard where contents like '%'||?||'%'";
+//		}
+//		
+		if(category.equals("all")){
+			sql = sql ="select * from replyboard where (name like '%'|| ? ||'%') or (title like '%'|| ? ||'%') or (contents like '%'|| ? ||'%')";
+			
+		}else {
+			sql = sql ="select * from replyboard where "+ category +" like '%'|| ? ||'%'";
+			
+		}
+	
+		
+		//컬럼명은 ?못씀
+		try {
+			pstmt = conn.prepareStatement(sql);
+//			pstmt.setString(1, category);
+			pstmt.setString(2, searchWord);
+			rs = pstmt.executeQuery();
+			searchList = new ArrayList<>();
+			while(rs.next()) {
+				BoardDto boardDto = new BoardDto();
+				boardDto.setId(rs.getInt("id"));
+				boardDto.setUserId(rs.getString("userId"));
+				boardDto.setName(rs.getString("name"));
+				boardDto.setTitle(rs.getString("title"));
+				boardDto.setContents(rs.getString("contents"));
+				boardDto.setRegDate(rs.getString("regDate"));
+				boardDto.setHit(rs.getInt("hit"));
+				boardDto.setRegroup(rs.getInt("regroup"));
+				boardDto.setRelevel(rs.getInt("relevel"));
+				boardDto.setRestep(rs.getInt("restep"));
+				boardDto.setAvailable(rs.getInt("available"));
+				
+				
+				
+				searchList.add(boardDto);
+			}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		
+		
+	}
+		return searchList;
+	}
+	
+	
+	
+	
 }
+
 
 
 
