@@ -4,8 +4,9 @@
 		<item key="casesensitive" value="false"/>
 		<item key="wholeword" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="getList"/>
+		<item key="selection" value="BlogMapper"/>
 		<list key="findhistory">
+			<item value="BlogMapper"/>
 			<item value="getList"/>
 			<item value="getvie"/>
 			<item value="getlist"/>
@@ -13,7 +14,6 @@
 			<item value="update"/>
 			<item value="relevel"/>
 			<item value="updatere"/>
-			<item value="insert"/>
 		</list>
 		<list key="replacehistory">
 		</list>
